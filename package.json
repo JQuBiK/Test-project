@@ -1,0 +1,13 @@
+{
+  "name": "php-blog-styles",
+  "version": "1.0.0",
+  "description": "SCSS build pipeline for the PHP blog",
+  "private": true,
+  "scripts": {
+    "build:css": "sass scss/style.scss public/assets/css/style.css --style=expanded --no-source-map",
+    "watch:css": "sass --watch scss/style.scss:public/assets/css/style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  }
+}

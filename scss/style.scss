@@ -1,0 +1,368 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: $font-base;
+    background: $color-bg;
+    color: $color-text;
+    line-height: 1.6;
+}
+
+a {
+    color: $color-accent;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 0.9em;
+}
+
+.container {
+    width: 100%;
+    max-width: $container;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.site-header {
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.site-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-text;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.site-nav a {
+    color: $color-muted;
+}
+
+.site-footer {
+    margin-top: 56px;
+    padding: 24px 0;
+    background: $color-surface;
+    border-top: 1px solid $color-border;
+    color: $color-muted;
+    font-size: 0.9rem;
+}
+
+.page {
+    padding-top: 32px;
+}
+
+.page-title {
+    font-size: 2rem;
+    margin: 0 0 24px;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    margin: 40px 0 16px;
+}
+
+.lead {
+    color: $color-muted;
+    font-size: 1.05rem;
+    margin: 0 0 24px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 9px 18px;
+    background: $color-accent;
+    color: #fff;
+    border-radius: $radius;
+    font-size: 0.9rem;
+    white-space: nowrap;
+
+    &:hover {
+        background: $color-accent-dark;
+        text-decoration: none;
+    }
+}
+
+.category-block {
+    margin-bottom: 48px;
+
+    &__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 6px;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    &__desc {
+        color: $color-muted;
+        margin: 0 0 20px;
+    }
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    @include respond-below($bp-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-below($bp-mobile) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+        transform: translateY(-3px);
+        @include card-shadow;
+    }
+
+    &__link {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__media {
+        aspect-ratio: 16 / 9;
+        background: $color-bg;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    &__title {
+        font-size: 1.1rem;
+        margin: 0 0 8px;
+    }
+
+    &__excerpt {
+        flex: 1;
+        margin: 0 0 16px;
+        color: $color-muted;
+        font-size: 0.92rem;
+    }
+
+    &__meta {
+        display: flex;
+        justify-content: space-between;
+        color: $color-muted;
+        font-size: 0.82rem;
+    }
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $color-border;
+}
+
+.toolbar__count {
+    color: $color-muted;
+}
+
+.toolbar__sort {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: $color-muted;
+}
+
+.sort-link {
+    color: $color-muted;
+
+    &.is-active {
+        color: $color-accent;
+        font-weight: 600;
+    }
+}
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 32px 0;
+
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 38px;
+        height: 38px;
+        padding: 0 8px;
+        border: 1px solid $color-border;
+        border-radius: $radius;
+        background: $color-surface;
+        color: $color-text;
+
+        &:hover {
+            border-color: $color-accent;
+            text-decoration: none;
+        }
+
+        &.is-active {
+            background: $color-accent;
+            border-color: $color-accent;
+            color: #fff;
+        }
+    }
+}
+
+.breadcrumbs {
+    margin-bottom: 16px;
+    color: $color-muted;
+    font-size: 0.88rem;
+}
+
+.post {
+    padding: 32px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+
+    @include respond-below($bp-mobile) {
+        padding: 20px;
+    }
+
+    &__title {
+        margin: 0 0 16px;
+        font-size: 2rem;
+    }
+
+    &__meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        color: $color-muted;
+        font-size: 0.85rem;
+    }
+
+    &__image {
+        width: 100%;
+        margin-bottom: 24px;
+        border-radius: $radius;
+    }
+
+    &__lead {
+        margin: 0 0 20px;
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    &__body {
+        font-size: 1.02rem;
+    }
+}
+
+.tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba($color-accent, 0.1);
+    color: $color-accent;
+    border-radius: 999px;
+    font-size: 0.8rem;
+
+    &:hover {
+        background: rgba($color-accent, 0.18);
+        text-decoration: none;
+    }
+}
+
+.similar {
+    margin-top: 16px;
+}
+
+.empty {
+    padding: 32px;
+    background: $color-surface;
+    border: 1px dashed $color-border;
+    border-radius: $radius;
+    color: $color-muted;
+    text-align: center;
+
+    code {
+        padding: 2px 6px;
+        background: $color-bg;
+        border-radius: 4px;
+    }
+}
+
+.error-page {
+    padding: 64px 0;
+    text-align: center;
+
+    &__code {
+        margin: 0;
+        color: $color-accent;
+        font-size: 5rem;
+    }
+
+    &__text {
+        margin: 0 0 24px;
+        color: $color-muted;
+    }
+}
